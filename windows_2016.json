@@ -27,8 +27,8 @@
   },
   {
     "type": "shell",
-    "remote_path": "c:/temp/script.bat",
-    "execute_command": "{cmd /c C:/temp/script.bat",
+    "remote_path": "c:/temp/echo.bat",
+    "execute_command": "{{.Vars}} cmd /c C:/temp/echo.bat",
     "scripts": [
       "./builder/setup-scripts/echo.bat"
     ]
