@@ -2,7 +2,7 @@
 "builders": [
     {
       "type": "googlecompute",
-      "project_id": "your-project-id",
+      "project_id": "vgs-pci-k8s",
       "source_image": "windows-server-2016-dc-v20170227",
       "disk_size": "50",
       "machine_type": "n1-standard-1",
@@ -18,20 +18,24 @@
       "image_description":"acme-windows-server-2016-dc-v20170227-{{timestamp}}"
     }
   ],
-"provisioners": [
-  {
-    "type": "file",
-    "source": "builder/setup-scripts",
-    "destination": "c:/temp",
-    "direction": "upload"
-  },
-  {
-    "type": "shell",
-    "remote_path": "c:/temp/echo.bat",
-    "execute_command": "{{.Vars}} cmd /c C:/temp/echo.bat",
-    "scripts": [
-      "./builder/setup-scripts/echo.bat"
-    ]
-  }
-]
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "builder/cis-benchmark-gpos",
+      "destination": "C:/Windows/Temp",
+      "direction": "upload"
+    },
+    {
+      "type": "windows-shell",
+      "inline": ["msiexec /i ./cis-benchmark-gpos/LocalGPO.msi ALLUSERS=1 /qn /norestart"]
+    },
+    {
+      "type": "windows-shell",
+      "remote_path": "c:/Windows/Temp/script.vbs",
+      "execute_command": "cscript c:/Windows/Temp/script.vbs",
+      "scripts": [
+        "./builder/setup-scripts/updates.vbs"
+      ]
+    }
+  ]
 }
