@@ -2,7 +2,7 @@
 "builders": [
     {
       "type": "googlecompute",
-      "project_id": "vgs-pci-k8s",
+      "project_id": "your-project-id",
       "source_image": "windows-server-2016-dc-v20170227",
       "disk_size": "50",
       "machine_type": "n1-standard-1",
@@ -21,9 +21,17 @@
 "provisioners": [
   {
     "type": "file",
-    "source": "builder/platform-uploads",
-    "destination": "c:/temp/builder",
+    "source": "builder/setup-scripts",
+    "destination": "c:/temp",
     "direction": "upload"
+  },
+  {
+    "type": "shell",
+    "remote_path": "c:/temp/script.bat",
+    "execute_command": "{cmd /c C:/temp/script.bat",
+    "scripts": [
+      "./builder/setup-scripts/echo.bat"
+    ]
   }
 ]
 }
