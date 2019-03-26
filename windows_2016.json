@@ -13,7 +13,17 @@
       "metadata": {
         "windows-startup-script-cmd": "winrm quickconfig -quiet & net user /add packer_user & net localgroup administrators packer_user /add & winrm set winrm/config/service/auth @{Basic=\"true\"}"
       },
-      "zone": "us-central1-a"
+      "zone": "us-west1-a",
+      "image_name": "acme-windows-server-2016-dc-v20170227-{{timestamp}}",
+      "image_description":"acme-windows-server-2016-dc-v20170227-{{timestamp}}"
     }
-  ]
+  ],
+"provisioners": [
+  {
+    "type": "file",
+    "source": "builder/platform-uploads",
+    "destination": "c:/temp/builder",
+    "direction": "upload"
+  }
+]
 }
