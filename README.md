@@ -1,5 +1,5 @@
 # Windows Server Hardening
-### Pack a windows Server and apply CIS Benchmark Hardening
+### Pack a Microsoft Windows Server© and apply CIS Benchmark Hardening
 
 #### To run this:
 ```sh
