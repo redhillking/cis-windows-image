@@ -26,6 +26,7 @@
       "direction": "upload"
     },
     {
+<<<<<<< HEAD
       "type": "windows-shell",
       "inline": ["msiexec /i ./cis-benchmark-gpos/LocalGPO.msi ALLUSERS=1 /qn /norestart"]
     },
@@ -39,3 +40,14 @@
     }
   ]
 }
+=======
+      "type": "shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+      "scripts": [
+        "./builder/setup-scripts/hello.bat"
+      ]
+    }
+  ]
+  }
+>>>>>>> 462de190b70686f8d5fbd0d6b8c016afcbe73692
