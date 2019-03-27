@@ -1,6 +1,5 @@
-{
-    "variables": {
-    },
+  {
+    "_comment": "TODO: AWS AMI is not working yet: Fix this!!",
     "builders": [{
       "type": "amazon-ebs",
       "region": "us-west-2",
@@ -16,5 +15,34 @@
       "instance_type": "t2.micro",
       "ssh_username": "packer",
       "ami_name": "packer-example {{timestamp}}"
-    }]
-  }
+    }],
+      "provisioners": [
+        {
+          "type": "file",
+          "source": "builder/cis-benchmark-gpos",
+          "destination": "C:\\Users\\packer_user\\AppData\\Local\\Temp",
+          "direction": "upload"
+        },
+        {
+          "type": "windows-shell",
+          "inline": ["certutil -decode \"C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\LGPO.exe.txt\" \"C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\LGPO.exe\""]
+        },
+        {
+          "type": "windows-shell",
+          "inline": ["C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\LGPO.exe /v /m C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\cis\\{0ad8bfdf-c7f0-4715-8ad6-ce95e0c13adc}\\DomainSysvol\\GPO\\Machine\\registry.pol"]
+        },
+        {
+          "type": "windows-shell",
+          "inline": ["C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\LGPO.exe /v /m C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\cis\\{0ad8bfdf-c7f0-4715-8ad6-ce95e0c13adc}\\DomainSysvol\\GPO\\User\\registry.pol"]
+        },  
+        {
+          "type": "windows-shell",
+          "remote_path": "C:\\Users\\packer_user\\AppData\\Local\\Temp\\script.vbs",
+          "execute_command": "cscript C:\\Users\\packer_user\\AppData\\Local\\Temp\\script.vbs",
+          "scripts": [
+            "./builder/setup-scripts/updates.vbs"
+          ]
+        }
+      ]
+    }
+    
