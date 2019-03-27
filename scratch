@@ -1,0 +1,4 @@
+    {
+      "type": "windows-shell",
+      "inline": ["cscript \"C:\\Windows\\Temp\\cis-benchmark-gpos\\LocalGPO.wsf\" /path:\"C:\\Windows\\Temp\\cis-benchmark-gpos\\cis\\{0ad8bfdf-c7f0-4715-8ad6-ce95e0c13adc}"]
+    },    
