@@ -1,0 +1,12 @@
+    {
+      "type": "windows-shell",
+      "inline": ["cscript \"C:\Users\packer_user\AppData\Local\Temp\cis-benchmark-gpos\LocalGPO\LocalGPO.wsf\" /path:\"C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\cis\\{0ad8bfdf-c7f0-4715-8ad6-ce95e0c13adc}"]
+    }, 
+
+C:\Users\packer_user\AppData\Local\Temp\cis-benchmark-gpos\lgpo.exe /m C:\Users\packer_user\AppData\Local\Temp\cis-benchmark-gpos\cis\{0ad8bfdf-c7f0-4715-8ad6-ce95e0c13adc}\DomainSysvol\GPO\Machine\registry.pol
+
+
+    {
+      "type": "powershell",
+      "inline": ["Expand-Archive -Path C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\localgpo.zip -DestinationPath C:\\Users\\packer_user\\AppData\\Local\\Temp\\cis-benchmark-gpos\\"]
+    },
